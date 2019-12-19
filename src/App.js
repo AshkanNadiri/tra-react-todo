@@ -5,30 +5,20 @@ import AddTodos from './components/AddTodo';
 import Header from './components/layout/Header';
 import About from './components/pages/About';
 import uuid from 'uuid';
-
-
 import './App.css';
+import Axios from 'axios';
 
 class App extends Component {
   state = {
-    todos: [ 
-      {
-        id: uuid.v4(),
-        title: 'Take trash out',
-        completed: false
-      },
-      {
-        id: uuid.v4(),
-        title: 'Fixing the car',
-        completed: false
-      },
-      {
-        id: uuid.v4(),
-        title: 'Shopping',
-        completed: false
-      }
-    ]
+    todos: []
   }
+  componentDidMount() {
+    Axios.get('https://jsonplaceholder.typicode.com/todos')
+      .then(res => console.log(res.data))
+  }
+
+
+
   // Toggle Complete
   markComplete = (id) => {
     this.setState({todos: this.state.todos.map(todo =>{
